@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "4c133cb1-a2fc-44a8-ac49-1d31372fa94c",
+		"name": "Exams System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth System",
+			"item": [
+				{
+					"name": "Register Form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Borislav\",\r\n    \"lastName\": \"Krumov\",\r\n    \"username\": \"lopatropa\",\r\n    \"password\": \"1234\",\r\n    \"email\": \"dasdasdas@sad.panda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"borkosan\",\r\n    \"password\": \"431343\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course Collection",
+			"item": [
+				{
+					"name": "Get All courses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEyMDg5MCwiaWF0IjoxNjg0MDg0ODkwfQ.j_7oHsj6bR7akaBFpwZcmVvFnt3sQ6QThy8V--bTHRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/api/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/course/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"course",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEyMDg5MCwiaWF0IjoxNjg0MDg0ODkwfQ.j_7oHsj6bR7akaBFpwZcmVvFnt3sQ6QThy8V--bTHRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"testing1\",\r\n    \"description\": \"Sad Panda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEyMDg5MCwiaWF0IjoxNjg0MDg0ODkwfQ.j_7oHsj6bR7akaBFpwZcmVvFnt3sQ6QThy8V--bTHRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"id\" : 1,\r\n    \"title\" : \"SAD PANDA\",\r\n    \"description\": \"sfaafas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEyMDg5MCwiaWF0IjoxNjg0MDg0ODkwfQ.j_7oHsj6bR7akaBFpwZcmVvFnt3sQ6QThy8V--bTHRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/api/course?courseId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"course"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "QuizCollection",
+			"item": [
+				{
+					"name": "View all Quizes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEyMDg5MCwiaWF0IjoxNjg0MDg0ODkwfQ.j_7oHsj6bR7akaBFpwZcmVvFnt3sQ6QThy8V--bTHRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/quiz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"quiz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View all Quizes Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEyMDg5MCwiaWF0IjoxNjg0MDg0ODkwfQ.j_7oHsj6bR7akaBFpwZcmVvFnt3sQ6QThy8V--bTHRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"REACT SCHOOL CHAPTER 2\",\r\n    \"Description\": \"CRASH COURSE\",\r\n    \"maxMarks\": 40,\r\n    \"numberOfQuestions\": 30,\r\n    \"isActive\": true,\r\n    \"course\": {\r\n        \"id\": 3,\r\n        \"title\": \"testing1\",\r\n        \"description\": \"Sad Panda\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/quiz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"quiz"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib3Jrb3NhbiIsImV4cCI6MTY4NDEwMjQxNCwiaWF0IjoxNjg0MDY2NDE0fQ.8luI2r0nzZkZBQfZpuEzAaQCjzaQ8F9QIWBK_OMmJOk",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/manage/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"manage",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
