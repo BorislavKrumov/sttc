@@ -2,6 +2,7 @@ package com.darkstyler.sttc.service.impl;
 
 import com.darkstyler.sttc.config.JwtUtil;
 import com.darkstyler.sttc.exception.AuthenticationException;
+import com.darkstyler.sttc.exception.UserException;
 import com.darkstyler.sttc.model.dto.LoginRequest;
 import com.darkstyler.sttc.model.dto.LoginResponse;
 import com.darkstyler.sttc.model.entity.Role;
@@ -19,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -40,17 +40,21 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public User registerUserService(User user) {
-		Optional<User> temp = userRepository.findByUsername(user.getUsername());
-		if (temp.isPresent()) {
-			throw new RuntimeException("User Already Exists");
-		} else {
-			Role role = roleRepository.findById("USER").isPresent() ? roleRepository.findById("USER").get() : null;
-			Set<Role> userRoles = new HashSet<>();
-			userRoles.add(role);
-			user.setRoles(userRoles);
-			user.setPassword(passwordEncoder.encode(user.getPassword()));
-			return userRepository.save(user);
-		}
+		userRepository.findByUsername(user.getUsername()).ifPresent(s -> {
+			throw new UserException("User with this username already exists.");
+		});
+		userRepository.findByEmail(user.getEmail()).ifPresent(s -> {
+			throw new UserException("User with this email already exists.");
+		});
+
+		Role role = roleRepository.findById("USER").isPresent() ? roleRepository.findById("USER").get() : null;
+		Set<Role> userRoles = new HashSet<>();
+		userRoles.add(role);
+		user.setRoles(userRoles);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setActive(true);
+		return userRepository.save(user);
+
 	}
 
 	public LoginResponse loginUserService(LoginRequest loginRequest) {

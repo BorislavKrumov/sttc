@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -66,6 +67,7 @@ public class SecurityConfig {
 				.antMatchers(HttpMethod.GET, "/api/quizResult/**").hasAuthority("USER")
 
 				.antMatchers(HttpMethod.GET, "/api/manage/users").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/api/manage/users").hasAuthority("ADMIN")
 
 				.anyRequest()
 				.denyAll()
