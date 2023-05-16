@@ -1,4 +1,4 @@
-package com.darkstyler.sttc.exception;
+package com.darkstyler.sttc.common.exception;
 
 public class CourseException extends RuntimeException {
 

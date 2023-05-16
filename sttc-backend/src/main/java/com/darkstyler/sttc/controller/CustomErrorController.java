@@ -1,6 +1,6 @@
 package com.darkstyler.sttc.controller;
 
-import com.darkstyler.sttc.exception.AuthenticationException;
+import com.darkstyler.sttc.common.exception.AuthenticationException;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
