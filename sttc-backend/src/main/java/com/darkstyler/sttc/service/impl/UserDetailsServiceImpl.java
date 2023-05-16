@@ -1,6 +1,6 @@
 package com.darkstyler.sttc.service.impl;
 
-import com.darkstyler.sttc.exception.AuthenticationException;
+import com.darkstyler.sttc.common.exception.AuthenticationException;
 import com.darkstyler.sttc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

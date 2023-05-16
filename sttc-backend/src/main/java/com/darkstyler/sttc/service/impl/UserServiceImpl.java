@@ -1,6 +1,6 @@
 package com.darkstyler.sttc.service.impl;
 
-import com.darkstyler.sttc.exception.UserException;
+import com.darkstyler.sttc.common.exception.UserException;
 import com.darkstyler.sttc.model.entity.User;
 import com.darkstyler.sttc.repository.UserRepository;
 import com.darkstyler.sttc.service.UserService;

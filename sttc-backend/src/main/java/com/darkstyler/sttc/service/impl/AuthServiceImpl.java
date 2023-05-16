@@ -1,8 +1,8 @@
 package com.darkstyler.sttc.service.impl;
 
 import com.darkstyler.sttc.config.JwtUtil;
-import com.darkstyler.sttc.exception.AuthenticationException;
-import com.darkstyler.sttc.exception.UserException;
+import com.darkstyler.sttc.common.exception.AuthenticationException;
+import com.darkstyler.sttc.common.exception.UserException;
 import com.darkstyler.sttc.model.dto.LoginRequest;
 import com.darkstyler.sttc.model.dto.LoginResponse;
 import com.darkstyler.sttc.model.entity.Role;

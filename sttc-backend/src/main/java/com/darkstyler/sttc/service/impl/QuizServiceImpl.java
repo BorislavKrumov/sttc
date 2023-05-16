@@ -1,6 +1,6 @@
 package com.darkstyler.sttc.service.impl;
 
-import com.darkstyler.sttc.exception.QuizException;
+import com.darkstyler.sttc.common.exception.QuizException;
 import com.darkstyler.sttc.model.entity.Course;
 import com.darkstyler.sttc.model.entity.Quiz;
 import com.darkstyler.sttc.repository.QuizRepository;

@@ -1,6 +1,6 @@
 package com.darkstyler.sttc.config;
 
-import com.darkstyler.sttc.exception.AuthenticationException;
+import com.darkstyler.sttc.common.exception.AuthenticationException;
 import com.darkstyler.sttc.service.impl.UserDetailsServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

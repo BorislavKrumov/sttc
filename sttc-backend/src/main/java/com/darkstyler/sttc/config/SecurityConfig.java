@@ -1,5 +1,6 @@
 package com.darkstyler.sttc.config;
 
+import com.darkstyler.sttc.model.entity.User;
 import com.darkstyler.sttc.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.ADMIN;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.COURSE_API;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.LOGIN_API;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.MANAGE_USER_API;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.QUESTION_API;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.QUIZ_API;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.QUIZ_RESULT_API;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.REGISTER_API;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.TEACHER;
+import static com.darkstyler.sttc.common.constant.ApplicationConstant.USER;
 
 
 @Configuration
@@ -45,29 +57,29 @@ public class SecurityConfig {
 		http.csrf()
 				.disable()
 				.authorizeRequests()
-				.antMatchers("/api/register").permitAll()
-				.antMatchers("/api/login").permitAll()
+				.antMatchers(REGISTER_API).permitAll()
+				.antMatchers(LOGIN_API).permitAll()
 
-				.antMatchers(HttpMethod.POST, "/api/course/**").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.GET, "/api/course/**").hasAnyAuthority("USER", "ADMIN")
-				.antMatchers(HttpMethod.PUT, "/api/course/**").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/course/**").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.POST, COURSE_API).hasAuthority(TEACHER)
+				.antMatchers(HttpMethod.GET, COURSE_API).hasAnyAuthority(USER, TEACHER)
+				.antMatchers(HttpMethod.PUT, COURSE_API).hasAuthority(TEACHER)
+				.antMatchers(HttpMethod.DELETE, COURSE_API).hasAuthority(TEACHER)
 
-				.antMatchers(HttpMethod.POST, "/api/quiz/**").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.GET, "/api/quiz/**").hasAnyAuthority("USER", "ADMIN")
-				.antMatchers(HttpMethod.PUT, "/api/quiz/**").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/quiz/**").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.POST, QUIZ_API).hasAuthority(TEACHER)
+				.antMatchers(HttpMethod.GET, QUIZ_API).hasAnyAuthority(USER, TEACHER)
+				.antMatchers(HttpMethod.PUT, QUIZ_API).hasAuthority(TEACHER)
+				.antMatchers(HttpMethod.DELETE, QUIZ_API).hasAuthority(TEACHER)
 
-				.antMatchers(HttpMethod.POST, "/api/question/**").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.GET, "/api/question/**").hasAnyAuthority("USER", "ADMIN")
-				.antMatchers(HttpMethod.PUT, "/api/question/**").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/question/**").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.POST, QUESTION_API).hasAuthority(TEACHER)
+				.antMatchers(HttpMethod.GET, QUESTION_API).hasAnyAuthority(USER, TEACHER)
+				.antMatchers(HttpMethod.PUT, QUESTION_API).hasAuthority(TEACHER)
+				.antMatchers(HttpMethod.DELETE, QUESTION_API).hasAuthority(TEACHER)
 
-				.antMatchers(HttpMethod.POST, "/api/quizResult/**").hasAuthority("USER")
-				.antMatchers(HttpMethod.GET, "/api/quizResult/**").hasAuthority("USER")
+				.antMatchers(HttpMethod.POST, QUIZ_RESULT_API).hasAuthority(USER)
+				.antMatchers(HttpMethod.GET, QUIZ_RESULT_API).hasAuthority(USER)
 
-				.antMatchers(HttpMethod.GET, "/api/manage/users").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.PUT, "/api/manage/users").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.GET, MANAGE_USER_API).hasAuthority(ADMIN)
+				.antMatchers(HttpMethod.PUT, MANAGE_USER_API).hasAuthority(ADMIN)
 
 				.anyRequest()
 				.denyAll()

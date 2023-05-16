@@ -1,6 +1,6 @@
 package com.darkstyler.sttc.service.impl;
 
-import com.darkstyler.sttc.exception.CourseException;
+import com.darkstyler.sttc.common.exception.CourseException;
 import com.darkstyler.sttc.model.entity.Course;
 import com.darkstyler.sttc.repository.CourseRepository;
 import com.darkstyler.sttc.service.CourseService;
