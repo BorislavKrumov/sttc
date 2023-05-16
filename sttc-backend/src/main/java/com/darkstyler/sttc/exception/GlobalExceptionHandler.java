@@ -3,6 +3,7 @@ package com.darkstyler.sttc.exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,6 +34,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		Map<String, Object> body = buildBody(ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.CONFLICT);
 	}
+
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
 		Map<String, Object> body = buildBody(ex.getMessage());
@@ -61,6 +63,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
 		Map<String, Object> body = buildBody(ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler({AccessDeniedException.class})
+	public ResponseEntity<Object> handleAccessDeniedException(
+			Exception ex, WebRequest request) {
+		return new ResponseEntity<Object>(
+				"Access denied message here", new HttpHeaders(), HttpStatus.FORBIDDEN);
 	}
 
 	@Override

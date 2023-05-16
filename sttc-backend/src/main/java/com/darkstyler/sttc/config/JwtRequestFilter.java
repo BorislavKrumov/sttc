@@ -1,8 +1,12 @@
 package com.darkstyler.sttc.config;
 
+import com.darkstyler.sttc.exception.AuthenticationException;
 import com.darkstyler.sttc.service.impl.UserDetailsServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,31 +35,40 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		String username = null;
 		String jwtToken = null;
-
-		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-			jwtToken = requestTokenHeader.substring(7);
-			try {
-				username = jwtUtil.extractUsername(jwtToken);
-			} catch (IllegalArgumentException e) {
-				System.out.println("Unable to get JWT Token");
-			} catch (ExpiredJwtException e) {
-				System.out.println("JWT Token has expired");
+		try {
+			if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+				jwtToken = requestTokenHeader.substring(7);
+				try {
+					username = jwtUtil.extractUsername(jwtToken);
+				} catch (IllegalArgumentException e) {
+					throw new AuthenticationException("Unable to get JWT token.");
+				} catch (ExpiredJwtException e) {
+					throw new AuthenticationException("Session expired.");
+				}
+				UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
+				if (jwtUtil.validateToken(jwtToken, userDetails)) {
+					UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+					usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+					SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+				} else {
+					throw new AuthenticationException("Authentication error, please try again.");
+				}
+				if (!userDetails.isEnabled()) {
+					throw new AuthenticationException("This account is disabled.");
+				}
 			}
-		} else {
-			System.out.println("JWT token does not start with Bearer");
+			filterChain.doFilter(request, response);
+		} catch (AuthenticationException e) {
+			response.setStatus(HttpStatus.FORBIDDEN.value());
+			response.getWriter().write(convertObjectToJson(e.getMessage()));
 		}
+	}
 
-		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-			UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
-			if (jwtUtil.validateToken(jwtToken, userDetails)) {
-				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-			} else {
-				System.out.println("Token is not valid");
-			}
+	public String convertObjectToJson(Object object) throws JsonProcessingException {
+		if (object == null) {
+			return null;
 		}
-		filterChain.doFilter(request, response);
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(object);
 	}
 }
