@@ -36,4 +36,8 @@ public class Course {
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Quiz> quizzes = new ArrayList<>();
+
+//	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Assignment> assignments;
 }

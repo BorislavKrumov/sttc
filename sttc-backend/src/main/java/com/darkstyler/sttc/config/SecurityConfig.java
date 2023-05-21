@@ -80,6 +80,10 @@ public class SecurityConfig {
 
 				.antMatchers(HttpMethod.GET, MANAGE_USER_API).hasAuthority(ADMIN)
 				.antMatchers(HttpMethod.PUT, MANAGE_USER_API).hasAuthority(ADMIN)
+				.antMatchers(HttpMethod.PUT, "/api/manage/users/da").hasAuthority(ADMIN)
+				.antMatchers(HttpMethod.GET, "/api/manage/users/me").hasAuthority(ADMIN)
+				.antMatchers(HttpMethod.GET, "/api/manage/users/icon").hasAuthority(ADMIN)
+
 
 				.anyRequest()
 				.denyAll()
